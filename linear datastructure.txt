@@ -1,0 +1,235 @@
+
+Q1.Write a program to find all pairs of an integer array whose sum is equal to a given number?
+
+
+def find_pairs(arr, n, sum_of_no):
+    n = len(arr)
+    sum_of_no = 6
+    pairs_count = 0
+    for i in range(0, n):
+        for j in range(i+1, n):
+            if arr[i] + arr[j] == sum_of_no:
+                pairs_count += 1
+    print("Pairs count = ", pairs_count)
+arr = [0, 2, 1, 4, 5 ,7 ,-2, 8, 4]
+find_pairs(arr, n, sum_of_no)
+
+Pairs count =  4
+
+//----------------------------------------------//
+Q2. Write a program to reverse an array in place? In place means you cannot create a new array. You have to update the original array.
+
+arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(arr)
+arr = arr[::-1]
+print("Reversed array is")
+print(arr)
+
+Answer----[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+Reversed array is
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+def reverse_arr(arr):
+    arr = reversed(arr)
+    return list(arr)
+arr = [11,12,13,14,15]
+reverse_arr(arr)
+
+Answer----[15, 14, 13, 12, 11]
+
+//------------------------------------//
+Q3. Write a program to check if two strings are a rotation of each other?
+
+def rotation_check(s1, s2):
+    if len(s1) == len(s2):
+        temp = s1 + s1
+        if temp.count(s2) > 0:
+            return 1
+    else:
+        return 0
+s1 = "ABCD"
+s2 = "BCDA"
+if rotation_check(s1, s2):
+    print("Strings are rotation of each other")
+else:
+    print("Strings are not rotation!")
+
+Answer----Strings are rotation of each other
+
+//-------------------------------//
+Q4. Write a program to print the first non-repeated character from a string?
+def non_repeated(str1):
+    for i in str1:
+        count = str1.count(i)
+        if count == 1:
+            return i
+            break
+str1 = "vaibhav"
+non_repeated(str1)  
+  
+Answer---'i'
+
+//--------------------------------------//
+Q5. Read about the Tower of Hanoi algorithm. Write a program to implement it.
+
+def myfunc(n, A, C, B):
+    if n == 0:
+        return
+    myfunc(n-1, A, B, C)
+    print("Move disk", n, "from rod", A, "to rod", C)
+    myfunc(n-1, B, C, A)
+
+n = int(input())
+myfunc(n, 'A', 'C', 'B')
+
+Answer----3
+Move disk 1 from rod A to rod C
+Move disk 2 from rod A to rod B
+Move disk 1 from rod C to rod B
+Move disk 3 from rod A to rod C
+Move disk 1 from rod B to rod A
+Move disk 2 from rod B to rod C
+Move disk 1 from rod A to rod C
+
+//------------------------------------------//
+Q6. Read about infix, prefix, and postfix expressions. Write a program to convert postfix to prefix expression.
+
+def is_operator(n):
+    if n == "+":
+        return True
+    if n == "-":
+        return True
+    if n == "/":
+        return True
+    if n == "*":
+        return True
+    return False
+
+def post_pre(x):
+    s = []
+    length = len(x)
+    for i in range(length):
+        if (is_operator(x[i])):
+            op1 = s[-1]
+            s.pop()
+            op2 = s[-1]
+            s.pop()
+            temp = x[i] + op2 + op1
+            s.append(temp)
+        else:
+             s.append(x[i])
+    ans = ""
+    for i in s:
+        ans += i
+    return ans
+
+x = "AB+CD-"
+print("Prefix : ", post_pre(x))
+
+Answer----Prefix :  +AB-CD
+
+//---------------------------------//
+Q7. Write a program to convert prefix expression to infix expression.
+
+def prefixToInfix(prefix):
+    stack = []
+    i = len(prefix) - 1
+    while i >= 0:
+        if not isOperator(prefix[i]):
+
+            stack.append(prefix[i])
+            i -= 1
+        else:
+            str = "(" + stack.pop() + prefix[i] + stack.pop() + ")"
+            stack.append(str)
+            i -= 1
+    return stack.pop()
+
+def isOperator(c):
+    if c == "*" or c == "+" or c == "-" or c == "/" or c == "^" or c == "(" or c == ")":
+        return True
+    else:
+        return False
+
+str = "*-A/BC-/AKL"
+print(prefixToInfix(str))
+
+Answer---((A-(B/C))*((A/K)-L))
+
+//---------------------------------//
+Q8. Write a program to check if all the brackets are closed in a given code snippet.
+
+def brackets_check(x):
+    var = []
+ 
+    for i in x:
+        if i in ["(", "{", "["]:
+            var.append(i)
+            
+        else:
+            if not var:
+                return False
+            temp_char = var.pop()
+            if temp_char == '(':
+                if i != ")":
+                    return False
+            if temp_char == '{':
+                if i != "}":
+                    return False
+            if temp_char == '[':
+                if i != "]":
+                    return False
+ 
+    if var:
+        return False
+    return True
+
+x = "{()}[(]"
+    
+if brackets_check(x):
+    print("Balanced")
+else:
+    print("Not Balanced")
+
+Answer----Not Balanced
+
+//------------------------------------------------//
+Q9. Write a program to reverse a stack.
+
+def reverse_stack(stack):
+    stack = reversed(stack)
+    return list(stack)
+stack = [11,12,13,14,15]
+
+print("Original Stack", *stack, sep='\n')
+print("Reversed Stack", *reverse_stack(stack), sep='\n')
+
+ Answer---Original Stack
+11
+12
+13
+14
+15
+Reversed Stack
+15
+14
+13
+12
+11
+
+//--------------------------------//
+Q10. Write a program to find the smallest number using a stack.
+
+def min_value(stack):
+    x=sorted(stack)
+    return x[0]
+    
+stack=[50,7,4,3,-1]    
+min_value(stack) 
+
+Answer---------[-1]
+
+stack1 = [45,67,23,55,14,88,90]
+min(*stack1)
+
+Answer------[14]
